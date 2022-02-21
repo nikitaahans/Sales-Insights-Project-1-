@@ -25,3 +25,19 @@ select sum(t.sales_amount) from sales.date d join sales.transactions t on d.date
 
 -- 9. Show total revenue in year 2020 in Chennai
 select sum(t.sales_amount) from sales.date d join sales.transactions t on d.date = t.order_date where d.year = 2020 and t.market_code = 'Mark001';
+
+
+select distinct(currency) from sales.transactions; -- we have two types of INR values that is 'INR\r' and 'INR'
+
+select count(*) from sales.transactions where currency = 'INR\r'; -- 150000 records
+
+select count(*) from sales.transactions where currency = 'INR'; -- 279 records
+
+-- DUPLICATES CHECK
+select count(*) from sales.transactions where currency = 'USD\r'; -- 2 records
+
+select count(*) from sales.transactions where currency = 'USD'; -- 2 records
+
+-- Since majority of records have '/r' character so we can filter out other records and after observing USD records, they actually have duplicates in records. 
+
+
